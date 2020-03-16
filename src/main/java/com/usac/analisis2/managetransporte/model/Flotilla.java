@@ -6,6 +6,7 @@
 package com.usac.analisis2.managetransporte.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -30,18 +32,21 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Flotilla.findByDescripcion", query = "SELECT f FROM Flotilla f WHERE f.descripcion = :descripcion")})
 public class Flotilla implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
     @Size(max = 100)
     @Column(name = "nombre")
     private String nombre;
     @Size(max = 200)
     @Column(name = "descripcion")
     private String descripcion;
+    @OneToMany(mappedBy = "flotillaVehiculo")
+    private Collection<Vehiculo> vehiculoCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
 
     public Flotilla() {
     }
@@ -58,21 +63,6 @@ public class Flotilla implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
 
     @Override
     public int hashCode() {
@@ -97,6 +87,30 @@ public class Flotilla implements Serializable {
     @Override
     public String toString() {
         return "com.usac.analisis2.managetransporte.model.Flotilla[ id=" + id + " ]";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Collection<Vehiculo> getVehiculoCollection() {
+        return vehiculoCollection;
+    }
+
+    public void setVehiculoCollection(Collection<Vehiculo> vehiculoCollection) {
+        this.vehiculoCollection = vehiculoCollection;
     }
     
 }

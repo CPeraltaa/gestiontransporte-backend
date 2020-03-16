@@ -3,5 +3,7 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="my_persistence_unit">
     <class>com.usac.analisis2.managetransporte.model.Piloto</class>
+    <class>com.usac.analisis2.managetransporte.model.Flotilla</class>
+    <class>com.usac.analisis2.managetransporte.model.Vehiculo</class>
   </persistence-unit>
 </persistence>
