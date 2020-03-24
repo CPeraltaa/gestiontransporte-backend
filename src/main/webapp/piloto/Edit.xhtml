@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PilotoEditDlg" widgetVar="PilotoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPilotoTitle}">
+            <h:form id="PilotoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pilotoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPilotoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{pilotoController.selected.id}" title="#{bundle.EditPilotoTitle_id}" required="true" requiredMessage="#{bundle.EditPilotoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditPilotoLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{pilotoController.selected.nombres}" title="#{bundle.EditPilotoTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.EditPilotoLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{pilotoController.selected.apellidos}" title="#{bundle.EditPilotoTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.EditPilotoLabel_fechanac}" for="fechanac" />
+                        <p:calendar id="fechanac" pattern="MM/dd/yyyy" value="#{pilotoController.selected.fechanac}" title="#{bundle.EditPilotoTitle_fechanac}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPilotoLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{pilotoController.selected.direccion}" title="#{bundle.EditPilotoTitle_direccion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{pilotoController.update}" value="#{bundle.Save}" update="display,:PilotoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PilotoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PilotoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
